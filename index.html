@@ -1,722 +1,1335 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+<!-- saved from url=(0123)file:///C:/Users/admin/AppData/Local/Temp/claude/D-%2Dcluadecode/6df26678-3ff4-4b7d-901f-a15b96f60e6b/scratchpad/index.html -->
+<html lang="en" data-theme=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meridian — Time Tracking &amp; Invoicing for Freelancers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./Meridian — Time Tracking &amp; Invoicing for Freelancers_files/css2" rel="stylesheet">
+  <style>
+    /* ── Tokens ───────────────────────────────────────────── */
+    :root {
+      --bg:          #F8F7F4;
+      --bg-alt:      #EEEDF0;
+      --surface:     #FFFFFF;
+      --surface-2:   #F0EFF8;
+      --border:      #E0DFE8;
+      --text:        #1A1F36;
+      --text-2:      #4A4F68;
+      --text-3:      #8B8FA8;
+      --accent:      #5B5FED;
+      --accent-hover:#4346D6;
+      --accent-lt:   #E9E8FF;
+      --accent-text: #FFFFFF;
+      --success:     #22C88A;
+      --warning:     #F5A623;
+      --shadow-sm:   0 1px 3px rgba(26,31,54,.07), 0 1px 2px rgba(26,31,54,.04);
+      --shadow-md:   0 4px 16px rgba(26,31,54,.10), 0 2px 4px rgba(26,31,54,.06);
+      --shadow-lg:   0 12px 40px rgba(26,31,54,.14), 0 4px 8px rgba(26,31,54,.06);
+      --radius:      10px;
+      --radius-lg:   18px;
+      --font: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --transition: 180ms ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:          #0E1120;
+        --bg-alt:      #141828;
+        --surface:     #1A1F36;
+        --surface-2:   #1F2442;
+        --border:      #282E4A;
+        --text:        #EAE9F5;
+        --text-2:      #A8AABF;
+        --text-3:      #666980;
+        --accent:      #6B6FF5;
+        --accent-hover:#7C80FF;
+        --accent-lt:   #1E2060;
+        --accent-text: #FFFFFF;
+        --success:     #1FAF78;
+        --warning:     #D98C18;
+        --shadow-sm:   0 1px 3px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.2);
+        --shadow-md:   0 4px 16px rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.2);
+        --shadow-lg:   0 12px 40px rgba(0,0,0,.5), 0 4px 8px rgba(0,0,0,.2);
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg:          #0E1120;
+      --bg-alt:      #141828;
+      --surface:     #1A1F36;
+      --surface-2:   #1F2442;
+      --border:      #282E4A;
+      --text:        #EAE9F5;
+      --text-2:      #A8AABF;
+      --text-3:      #666980;
+      --accent:      #6B6FF5;
+      --accent-hover:#7C80FF;
+      --accent-lt:   #1E2060;
+      --accent-text: #FFFFFF;
+      --success:     #1FAF78;
+      --warning:     #D98C18;
+      --shadow-sm:   0 1px 3px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.2);
+      --shadow-md:   0 4px 16px rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.2);
+      --shadow-lg:   0 12px 40px rgba(0,0,0,.5), 0 4px 8px rgba(0,0,0,.2);
+    }
+
+    :root[data-theme="light"] {
+      --bg:          #F8F7F4;
+      --bg-alt:      #EEEDF0;
+      --surface:     #FFFFFF;
+      --surface-2:   #F0EFF8;
+      --border:      #E0DFE8;
+      --text:        #1A1F36;
+      --text-2:      #4A4F68;
+      --text-3:      #8B8FA8;
+      --accent:      #5B5FED;
+      --accent-hover:#4346D6;
+      --accent-lt:   #E9E8FF;
+      --accent-text: #FFFFFF;
+      --success:     #22C88A;
+      --warning:     #F5A623;
+      --shadow-sm:   0 1px 3px rgba(26,31,54,.07), 0 1px 2px rgba(26,31,54,.04);
+      --shadow-md:   0 4px 16px rgba(26,31,54,.10), 0 2px 4px rgba(26,31,54,.06);
+      --shadow-lg:   0 12px 40px rgba(26,31,54,.14), 0 4px 8px rgba(26,31,54,.06);
+    }
+
+    /* ── Reset ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; cursor: pointer; border: none; }
+
+    /* ── Layout ──────────────────────────────────────────── */
+    .container {
+      max-width: 1120px;
+      margin-inline: auto;
+      padding-inline: 24px;
+    }
+
+    /* ── Nav ──────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      height: 64px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -.01em;
+      color: var(--text);
+    }
+
+    .logo-mark {
+      width: 28px; height: 28px;
+      background: var(--accent);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-mark svg { width: 14px; height: 14px; fill: #fff; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+      margin-left: 8px;
+    }
+
+    .nav-links a {
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--text-2);
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: auto;
+    }
+
+    .btn-ghost {
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--text-2);
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      transition: background var(--transition), color var(--transition);
+      background: transparent;
+    }
+
+    .btn-ghost:hover { background: var(--bg-alt); color: var(--text); }
+
+    .btn-primary {
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--accent-text);
+      background: var(--accent);
+      padding: 8px 18px;
+      border-radius: var(--radius);
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 2px 8px rgba(91,95,237,.30);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(91,95,237,.40);
+    }
+
+    .btn-primary:active { transform: translateY(0); }
+
+    /* ── Hero ─────────────────────────────────────────────── */
+    .hero {
+      padding: 80px 0 60px;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-lt);
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 3.1rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -.03em;
+      text-wrap: balance;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      max-width: 420px;
+      margin-bottom: 32px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-hero {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-text);
+      background: var(--accent);
+      padding: 13px 28px;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 16px rgba(91,95,237,.35);
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+
+    .btn-hero:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(91,95,237,.45);
+    }
+
+    .btn-outline {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      transition: border-color var(--transition), background var(--transition);
+    }
+
+    .btn-outline:hover { border-color: var(--accent); background: var(--accent-lt); color: var(--accent); }
+
+    .hero-note {
+      margin-top: 16px;
+      font-size: .8rem;
+      color: var(--text-3);
+    }
+
+    /* ── Dashboard mockup ─────────────────────────────────── */
+    .dashboard {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .dash-topbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-alt);
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FEBC2E; }
+    .dot-g { background: #28C840; }
+
+    .dash-title {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--text-3);
+      margin-left: 8px;
+    }
+
+    .dash-body { padding: 20px; }
+
+    .dash-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+    }
+
+    .stat-label {
+      font-size: .68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--text-3);
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -.03em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-delta {
+      font-size: .68rem;
+      font-weight: 600;
+      color: var(--success);
+      margin-top: 2px;
+    }
+
+    .dash-chart {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .chart-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 72px;
+    }
+
+    .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+
+    .bar {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      background: var(--border);
+      transition: background .3s;
+    }
+
+    .bar.active { background: var(--accent); }
+    .bar.today { background: var(--accent); opacity: .5; }
+
+    .bar-day {
+      font-size: .6rem;
+      color: var(--text-3);
+      font-weight: 600;
+    }
+
+    .dash-timers {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .timer-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      background: var(--surface-2);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .timer-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .timer-label {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .timer-client {
+      font-size: .72rem;
+      color: var(--text-3);
+    }
+
+    .timer-time {
+      font-size: .78rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--text);
+    }
+
+    /* ── Stats bar ────────────────────────────────────────── */
+    .stats-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 0;
+    }
+
+    .stats-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 0 24px;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      font-variant-numeric: tabular-nums;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .stat-num span { color: var(--accent); }
+
+    .stat-desc {
+      font-size: .82rem;
+      color: var(--text-3);
+      font-weight: 500;
+    }
+
+    /* ── Features ─────────────────────────────────────────── */
+    .features { padding: 88px 0; }
+
+    .section-eyebrow {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.18;
+      text-wrap: balance;
+      margin-bottom: 14px;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--text-2);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 52px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+    }
+
+    .feature-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+    }
+
+    .feature-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--accent-lt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .feature-icon svg { width: 20px; height: 20px; fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: .88rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    /* ── How it works ─────────────────────────────────────── */
+    .how { padding: 0 0 88px; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+      margin-top: 52px;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: calc(12.5% + 22px);
+      right: calc(12.5% + 22px);
+      height: 2px;
+      background: var(--border);
+    }
+
+    .step {
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+    }
+
+    .step-num {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      font-weight: 800;
+      color: var(--text-3);
+      margin: 0 auto 18px;
+      position: relative;
+      z-index: 1;
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+    }
+
+    .step:hover .step-num {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .step h4 {
+      font-size: .92rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      font-size: .82rem;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    /* ── Pricing ──────────────────────────────────────────── */
+    .pricing {
+      padding: 88px 0;
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 52px;
+    }
+
+    .pricing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .pricing-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .pricing-card.featured {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 8px 32px rgba(91,95,237,.35);
+    }
+
+    .pricing-card.featured:hover {
+      box-shadow: 0 12px 40px rgba(91,95,237,.45);
+    }
+
+    .plan-badge {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+      background: var(--accent-lt);
+      color: var(--accent);
+    }
+
+    .featured .plan-badge {
+      background: rgba(255,255,255,.2);
+      color: #fff;
+    }
+
+    .plan-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .plan-price {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .plan-price sup {
+      font-size: 1.1rem;
+      font-weight: 700;
+      vertical-align: super;
+      letter-spacing: 0;
+    }
+
+    .plan-period {
+      font-size: .82rem;
+      color: var(--text-3);
+      margin-bottom: 24px;
+    }
+
+    .featured .plan-period { color: rgba(255,255,255,.65); }
+
+    .plan-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .featured .plan-divider { border-top-color: rgba(255,255,255,.2); }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .88rem;
+      color: var(--text-2);
+    }
+
+    .featured .plan-features li { color: rgba(255,255,255,.85); }
+
+    .plan-features li::before {
+      content: '';
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--accent-lt);
+      flex-shrink: 0;
+      margin-top: 2px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%235B5FED' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-size: contain;
+    }
+
+    .featured .plan-features li::before {
+      background-color: rgba(255,255,255,.2);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+
+    .btn-plan {
+      display: block;
+      text-align: center;
+      font-weight: 700;
+      font-size: .9rem;
+      padding: 12px 20px;
+      border-radius: var(--radius);
+      transition: background var(--transition), opacity var(--transition);
+    }
+
+    .btn-plan-outline {
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .btn-plan-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-lt); }
+
+    .btn-plan-white {
+      background: #fff;
+      color: var(--accent);
+    }
+
+    .btn-plan-white:hover { opacity: .92; }
+
+    /* ── Testimonials ─────────────────────────────────────── */
+    .testimonials { padding: 88px 0; }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 52px;
+    }
+
+    .testi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .testi-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 14px;
+    }
+
+    .star {
+      color: var(--warning);
+      font-size: .9rem;
+    }
+
+    .testi-text {
+      font-size: .9rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .author-role {
+      font-size: .78rem;
+      color: var(--text-3);
+    }
+
+    /* ── CTA ──────────────────────────────────────────────── */
+    .cta-section {
+      padding: 80px 0;
+    }
+
+    .cta-box {
+      background: var(--accent);
+      border-radius: 24px;
+      padding: 64px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.07);
+    }
+
+    .cta-box::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.05);
+    }
+
+    .cta-box h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -.03em;
+      text-wrap: balance;
+      margin-bottom: 14px;
+    }
+
+    .cta-box p {
+      font-size: 1rem;
+      color: rgba(255,255,255,.75);
+      max-width: 440px;
+      margin-inline: auto;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: .82rem;
+      color: var(--text-3);
+      font-weight: 500;
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      font-size: .8rem;
+      color: var(--text-3);
+    }
+
+    /* ── Responsive ───────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .dashboard { max-width: 480px; }
+      .feature-grid, .pricing-grid, .testi-grid { grid-template-columns: 1fr 1fr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { border-right: none; padding: 16px; }
+      .steps { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .steps::before { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .feature-grid, .pricing-grid, .testi-grid, .stats-inner { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .cta-box { padding: 40px 24px; }
+      .cta-actions { flex-direction: column; align-items: center; }
+      .dash-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0ms !important; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+
+<!-- Nav -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="file:///C:/" class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M2 10V6l5-4 5 4v4l-5 3-5-3Z"></path></svg>
         </div>
-    </header>
+        Meridian
+      </a>
+      <ul class="nav-links">
+        <li><a href="file:///C:/Users/admin/AppData/Local/Temp/claude/D--cluadecode/6df26678-3ff4-4b7d-901f-a15b96f60e6b/scratchpad/index.html#features">Features</a></li>
+        <li><a href="file:///C:/Users/admin/AppData/Local/Temp/claude/D--cluadecode/6df26678-3ff4-4b7d-901f-a15b96f60e6b/scratchpad/index.html#how">How it works</a></li>
+        <li><a href="file:///C:/Users/admin/AppData/Local/Temp/claude/D--cluadecode/6df26678-3ff4-4b7d-901f-a15b96f60e6b/scratchpad/index.html#pricing">Pricing</a></li>
+        <li><a href="file:///C:/Users/admin/AppData/Local/Temp/claude/D--cluadecode/6df26678-3ff4-4b7d-901f-a15b96f60e6b/scratchpad/index.html#testimonials">Reviews</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn-ghost">Sign in</button>
+        <button class="btn-primary">Start free trial</button>
+      </div>
+    </div>
+  </div>
+</nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">Now with AI-powered invoicing</div>
+        <h1>Stop guessing where your <em>time</em> went.</h1>
+        <p>Meridian tracks every billable hour, generates professional invoices in seconds, and puts you back in control of your freelance business.</p>
+        <div class="hero-cta">
+          <button class="btn-hero">Start free — no card needed</button>
+          <button class="btn-outline">Watch demo</button>
         </div>
-    </section>
+        <p class="hero-note">14-day free trial &nbsp;·&nbsp; Cancel any time &nbsp;·&nbsp; GDPR compliant</p>
+      </div>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+      <!-- Dashboard mockup -->
+      <div class="dashboard">
+        <div class="dash-topbar">
+          <div class="dot dot-r"></div>
+          <div class="dot dot-y"></div>
+          <div class="dot dot-g"></div>
+          <span class="dash-title">meridian.app — Dashboard</span>
         </div>
-    </section>
+        <div class="dash-body">
+          <div class="dash-stats">
+            <div class="stat-card">
+              <div class="stat-label">This week</div>
+              <div class="stat-value">32.5h</div>
+              <div class="stat-delta">↑ 8% vs last week</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Invoiced</div>
+              <div class="stat-value">$4,820</div>
+              <div class="stat-delta">↑ 12% this month</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Overdue</div>
+              <div class="stat-value" style="color:var(--warning)">$640</div>
+              <div class="stat-delta" style="color:var(--warning)">2 invoices</div>
+            </div>
+          </div>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
+          <div class="dash-chart">
+            <div class="stat-label" style="margin-bottom:12px">Daily hours</div>
+            <div class="chart-row">
+              <div class="bar-wrap"><div class="bar active" style="height:55%"></div><div class="bar-day">M</div></div>
+              <div class="bar-wrap"><div class="bar active" style="height:78%"></div><div class="bar-day">T</div></div>
+              <div class="bar-wrap"><div class="bar active" style="height:62%"></div><div class="bar-day">W</div></div>
+              <div class="bar-wrap"><div class="bar active" style="height:90%"></div><div class="bar-day">T</div></div>
+              <div class="bar-wrap"><div class="bar active" style="height:44%"></div><div class="bar-day">F</div></div>
+              <div class="bar-wrap"><div class="bar today" style="height:30%"></div><div class="bar-day">S</div></div>
+              <div class="bar-wrap"><div class="bar" style="height:15%"></div><div class="bar-day">S</div></div>
             </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
+          </div>
+
+          <div class="dash-timers">
+            <div class="timer-row">
+              <div class="timer-dot" style="background:#5B5FED"></div>
+              <div class="timer-label">Website redesign</div>
+              <div class="timer-client">Acme Corp.</div>
+              <div class="timer-time">3:42:18</div>
             </div>
+            <div class="timer-row">
+              <div class="timer-dot" style="background:#22C88A"></div>
+              <div class="timer-label">API integration</div>
+              <div class="timer-client">Buildly Inc.</div>
+              <div class="timer-time">1:15:04</div>
+            </div>
+            <div class="timer-row">
+              <div class="timer-dot" style="background:#F5A623"></div>
+              <div class="timer-label">Strategy call prep</div>
+              <div class="timer-client">Studio Nine</div>
+              <div class="timer-time">0:28:55</div>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
+<!-- Stats bar -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num">48<span>k+</span></div>
+        <div class="stat-desc">Freelancers worldwide</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">$2.1<span>B</span></div>
+        <div class="stat-desc">Invoiced through Meridian</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">99<span>.8%</span></div>
+        <div class="stat-desc">Uptime over 12 months</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4.9<span>/5</span></div>
+        <div class="stat-desc">Average user rating</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Features -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-eyebrow">Features</div>
+    <h2 class="section-title">Everything a freelancer needs,<br>nothing they don't.</h2>
+    <p class="section-sub">Built by a freelancer who was tired of spreadsheets, chasing invoices, and forgetting to log hours mid-meeting.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
+        <h3>One-click time tracking</h3>
+        <p>Start a timer from anywhere — browser extension, menu bar, or mobile. Assign to a client and project with a single tap.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
         </div>
-    </footer>
+        <h3>Smart invoice generation</h3>
+        <p>Select a time range, pick a client, and Meridian drafts a branded invoice with all the right line items. Review, adjust, send.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+        </div>
+        <h3>Live project reports</h3>
+        <p>See budget burn, hours by client, and monthly revenue trends in real time. Export to PDF or CSV for client-facing reports.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        </div>
+        <h3>Multi-device sync</h3>
+        <p>Start a timer on your laptop and stop it on your phone. Everything syncs instantly so no hour slips through the cracks.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <h3>Client portal</h3>
+        <p>Give each client a private link where they can view project progress, approved timesheets, and outstanding invoices.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <h3>Stripe &amp; PayPal built-in</h3>
+        <p>Accept payments directly on your invoices. Funds land in your account within two business days, no third-party fees beyond processor rates.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+<!-- How it works -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">Up and running in under five minutes.</h2>
+    <p class="section-sub">No implementation consultant. No onboarding call. Just sign up and start your first timer.</p>
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Create your workspace</h4>
+        <p>Sign up with email or Google. Set your hourly rate and currency — Meridian handles the rest.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Add clients &amp; projects</h4>
+        <p>Import from a CSV or add manually. Each project has its own budget, rate, and status.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Log your hours</h4>
+        <p>Use the timer or log time retroactively. Tag entries with tasks for detailed breakdowns.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Send &amp; get paid</h4>
+        <p>Generate an invoice in one click and send it from Meridian. Track when clients view it.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+<!-- Testimonials -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-eyebrow">Testimonials</div>
+    <h2 class="section-title">Freelancers love it.</h2>
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
-</body>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testi-text">"I used to forget to log at least 20% of my hours every week. With Meridian's menu bar timer I just hit the button when I sit down. Invoicing went from 2 hours to 8 minutes."</p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background:#5B5FED">S</div>
+          <div>
+            <div class="author-name">Sophie Hartmann</div>
+            <div class="author-role">UI/UX Designer · Berlin</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testi-text">"The client portal alone is worth the subscription. My clients can see live project status, which means fewer check-in emails and more trust. Game changer."</p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background:#22C88A">J</div>
+          <div>
+            <div class="author-name">James Okoro</div>
+            <div class="author-role">Full-stack Developer · Lagos</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testi-text">"Switched from Toggl + FreshBooks. Meridian replaces both at a third of the price, and the reports are actually beautiful enough to send to clients directly."</p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background:#F5A623">A</div>
+          <div>
+            <div class="author-name">Annika Svensson</div>
+            <div class="author-role">Brand Consultant · Stockholm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-</html>
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-eyebrow">Pricing</div>
+    <h2 class="section-title">Simple pricing, no surprises.</h2>
+    <p class="section-sub">All plans include unlimited time entries and a 14-day free trial with no credit card required.</p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="plan-badge">Starter</div>
+        <div class="plan-name">Solo</div>
+        <div class="plan-price"><sup>$</sup>0</div>
+        <div class="plan-period">forever free</div>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li>Up to 3 clients</li>
+          <li>Unlimited time tracking</li>
+          <li>5 invoices per month</li>
+          <li>Basic PDF export</li>
+          <li>Email support</li>
+        </ul>
+        <a href="file:///C:/Users/admin/AppData/Local/Temp/claude/D--cluadecode/6df26678-3ff4-4b7d-901f-a15b96f60e6b/scratchpad/index.html#" class="btn-plan btn-plan-outline">Get started free</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="plan-badge">Most popular</div>
+        <div class="plan-name" style="color:#fff">Professional</div>
+        <div class="plan-price" style="color:#fff"><sup>$</sup>12</div>
+        <div class="plan-period">per month, billed annually</div>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li>Unlimited clients &amp; projects</li>
+          <li>Unlimited invoicing</li>
+          <li>Client portal access</li>
+          <li>Stripe &amp; PayPal payments</li>
+          <li>Revenue &amp; budget reports</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="file:///C:/Users/admin/AppData/Local/Temp/claude/D--cluadecode/6df26678-3ff4-4b7d-901f-a15b96f60e6b/scratchpad/index.html#" class="btn-plan btn-plan-white">Start 14-day trial</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="plan-badge">Teams</div>
+        <div class="plan-name">Agency</div>
+        <div class="plan-price"><sup>$</sup>38</div>
+        <div class="plan-period">per month, billed annually</div>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li>Everything in Professional</li>
+          <li>Up to 10 team members</li>
+          <li>Team time reports</li>
+          <li>Role-based permissions</li>
+          <li>Custom invoice branding</li>
+          <li>Dedicated account manager</li>
+        </ul>
+        <a href="file:///C:/Users/admin/AppData/Local/Temp/claude/D--cluadecode/6df26678-3ff4-4b7d-901f-a15b96f60e6b/scratchpad/index.html#" class="btn-plan btn-plan-outline">Start 14-day trial</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Start tracking. Get paid faster.</h2>
+      <p>Join 48,000 freelancers who have stopped leaving money on the table. It takes less than two minutes to set up.</p>
+      <div class="cta-actions">
+        <button class="btn-hero" style="background:#fff;color:var(--accent)">Create your free account</button>
+        <button class="btn-outline" style="border-color:rgba(255,255,255,.3);color:#fff;background:transparent">See all features</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="file:///C:/" class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M2 10V6l5-4 5 4v4l-5 3-5-3Z"></path></svg>
+        </div>
+        Meridian
+      </a>
+      <ul class="footer-links">
+        <li><a href="file:///C:/Users/admin/AppData/Local/Temp/claude/D--cluadecode/6df26678-3ff4-4b7d-901f-a15b96f60e6b/scratchpad/index.html#">Privacy</a></li>
+        <li><a href="file:///C:/Users/admin/AppData/Local/Temp/claude/D--cluadecode/6df26678-3ff4-4b7d-901f-a15b96f60e6b/scratchpad/index.html#">Terms</a></li>
+        <li><a href="file:///C:/Users/admin/AppData/Local/Temp/claude/D--cluadecode/6df26678-3ff4-4b7d-901f-a15b96f60e6b/scratchpad/index.html#">Security</a></li>
+        <li><a href="file:///C:/Users/admin/AppData/Local/Temp/claude/D--cluadecode/6df26678-3ff4-4b7d-901f-a15b96f60e6b/scratchpad/index.html#">Status</a></li>
+        <li><a href="file:///C:/Users/admin/AppData/Local/Temp/claude/D--cluadecode/6df26678-3ff4-4b7d-901f-a15b96f60e6b/scratchpad/index.html#">Contact</a></li>
+      </ul>
+      <p class="footer-copy">© 2025 Meridian Technologies Ltd. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
